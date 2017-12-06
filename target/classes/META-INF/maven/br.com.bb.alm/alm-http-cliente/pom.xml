@@ -1,0 +1,139 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>br.com.bb.mvn</groupId>
+		<artifactId>mvn-pom-java</artifactId>
+		<version>1.2.1</version>
+	</parent>
+
+
+
+	<groupId>br.com.bb.alm</groupId>
+	<artifactId>alm-http-cliente</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>Biblioteca utilitária para requisiçao HTTP</description>
+
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<skipIntegrationTests>false</skipIntegrationTests>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<bb.java.version>8</bb.java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>2.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-json-provider</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.9.1</version>
+				<executions>
+					<execution>
+						<id>add-integration-test-source-as-test-sources</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/it/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>${maven.failsafe.pluginVersion}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<skipTests>false</skipTests>
+					<includes>
+						<include>**/*.class</include>
+					</includes><!-- <excludedGroups>br.com.bb.alm.UnitTest</excludedGroups> -->
+					<excludes>
+						<exclude>**/ut/*</exclude>
+						<exclude>**/ut/**/*</exclude>
+						<exclude>**/*Test.java</exclude>
+					</excludes>
+					<argLine>-Xmx1G -XX:MaxPermSize=512m -XX:+UseConcMarkSweepGC
+						-XX:+CMSClassUnloadingEnabled ${jacoco.agent.it.arg}</argLine>
+					<reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+				</configuration>
+			</plugin>
+			
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.surefire.pluginVersion}</version>
+				<inherited>true</inherited>
+				<configuration>
+					<includes>
+						<include>**/*.class</include>
+					</includes><!-- <excludedGroups>br.com.bb.alm.IntegrationTest</excludedGroups> -->
+					<excludes>
+						<exclude>**/it/*</exclude>
+						<exclude>**/it/**/*</exclude>
+						<exclude>**/*IT.java</exclude>
+					</excludes>
+					<argLine>-Xmx1G -XX:MaxPermSize=512m -XX:+UseConcMarkSweepGC
+						-XX:+CMSClassUnloadingEnabled ${jacoco.agent.ut.arg}</argLine>
+				</configuration>
+			</plugin>
+			
+
+
+		</plugins>
+	</build>
+</project>
