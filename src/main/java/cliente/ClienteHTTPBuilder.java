@@ -7,10 +7,11 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
 import conexao.HabilitadorSSL;
+import interfaces.URL;
 
 public class ClienteHTTPBuilder {
 	
-	public ClienteHTTP criarRequisicaoHTTP() {
+	public URL criarRequisicaoHTTP() {
 		
 		Client client = ClientBuilder.newBuilder().hostnameVerifier(new HostnameVerifier() {
 			

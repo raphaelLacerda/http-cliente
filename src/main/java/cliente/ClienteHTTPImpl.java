@@ -12,8 +12,9 @@ import interfaces.Formato;
 import interfaces.MetodosHttp;
 import interfaces.Parametros;
 import interfaces.ParametrosComFormato;
+import interfaces.URL;
 
-class ClienteHTTPImpl implements ClienteHTTP, ParametrosComFormato, Cabecalho, MetodosHttp {
+class ClienteHTTPImpl implements URL, ParametrosComFormato, Cabecalho, MetodosHttp {
 	
 	private Client		client;
 	private Builder		request;

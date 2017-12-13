@@ -3,16 +3,18 @@ package rest;
 
 import java.util.Map;
 
+import javax.ws.rs.core.MediaType;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import cliente.ClienteHTTP;
 import cliente.ClienteHTTPBuilder;
+import interfaces.URL;
 
 public class ClienteHTTPBuilderTest {
 	
-	private ClienteHTTP clienteHTTP;
+	private URL clienteHTTP;
 	
 	@Before
 	public void setUp() {
@@ -44,6 +46,15 @@ public class ClienteHTTPBuilderTest {
 		Assert.assertEquals("alm-integracao-atc-ui-web", funcionario.getAplicacao());
 		Assert.assertEquals("F8437296", funcionario.getMatricula());
 		Assert.assertNotNull(funcionario.getEquipesUor().get(0));
+	}
+	
+	@Test
+	public void deveFazerSemJSON() {
+		
+		String resposta = clienteHTTP.comURL("https://intranet.bb.com.br").semParametros()
+				.aceitandoFormato(MediaType.TEXT_PLAIN).invocandoMetodo().get(String.class);
+		
+		Assert.assertNotNull(resposta);
 	}
 	
 }
