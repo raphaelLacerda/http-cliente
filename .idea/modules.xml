@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/alm-http-cliente.iml" filepath="$PROJECT_DIR$/alm-http-cliente.iml" />
+      <module fileurl="file://$PROJECT_DIR$/http-cliente.iml" filepath="$PROJECT_DIR$/http-cliente.iml" />
     </modules>
   </component>
 </project>

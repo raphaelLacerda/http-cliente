@@ -1,5 +1,5 @@
 
-package conexao;
+package cliente;
 
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -9,7 +9,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-public class HabilitadorSSL {
+class HabilitadorSSL {
 	
 	
 	public SSLContext getSSL() {
